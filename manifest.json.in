@@ -1,0 +1,52 @@
+{
+  "manifest_version": 1,
+  "id": "openvpn",
+  "i18n": {
+    "default": {
+      "name": "OpenVPN",
+      "description": "Installs the OpenVPN client and the TUN kernel module. Configure interfaces in Network settings."
+    },
+    "zh": {
+      "name": "OpenVPN",
+      "description": "安装 OpenVPN 客户端和 TUN 内核模块。在网络设置里配置接口。"
+    },
+    "zh-TW": {
+      "name": "OpenVPN",
+      "description": "安裝 OpenVPN 用戶端和 TUN 核心模組。在網路設定裡設定介面。"
+    }
+  },
+  "version": "@VERSION@",
+  "api_version": 2,
+  "architecture": "@ARCH@",
+  "kind": "environment",
+  "author": "OneKVM",
+  "kernel_modules": ["tun"],
+  "permissions": [],
+  "capabilities": [],
+  "default_enabled": false,
+  "icon": {"source": "custom", "path": "web/logo.svg"},
+  "methods": [
+    {
+      "name": "health",
+      "command": ["bin/onekvm-openvpn", "--health"],
+      "timeout_seconds": 5
+    }
+  ],
+  "settings_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "secret_fields": [],
+  "resource_limits": {
+    "memory_max": "4M",
+    "cpu_quota": "1%",
+    "tasks_max": 1,
+    "limit_nofile": 16
+  },
+  "healthcheck": {
+    "type": "exec",
+    "command": ["bin/onekvm-openvpn", "--health"],
+    "timeout_seconds": 5
+  }
+}
